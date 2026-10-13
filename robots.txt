@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://haroldhq.app/sitemap.xml
