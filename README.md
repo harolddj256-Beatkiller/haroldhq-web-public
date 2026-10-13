@@ -7,7 +7,7 @@ Product website for Harold DJ Pro, Radio Studio and Beklo. The main site contain
 - Production: https://haroldhq-web.onrender.com/
 - Intended custom domain: https://haroldhq.app/ (domain configuration is separate)
 - Render service: `srv-db6piirl550s739j6h50`
-- Render publishes `public/` automatically from `render/main`.
+- Render publishes `public/` from `render/main`. Verify that the new commit has a deployment after each push. The current public-repository connection required a manual deployment for this update.
 - `origin`: private website source repository.
 - `render`: public website deployment mirror. Never add application source or credentials.
 
