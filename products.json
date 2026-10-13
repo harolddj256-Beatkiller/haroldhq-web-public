@@ -1,0 +1,86 @@
+[
+  {
+    "id": "dj",
+    "name": "Harold DJ Pro",
+    "short": "DJ Pro",
+    "category": "audio",
+    "label": "DJ & performance",
+    "headline": "Make the mix your own.",
+    "description": "Prepare your library, shape your transitions, and bring audio and video into one performance workspace.",
+    "version": "4.3.41",
+    "status": "Release in preparation",
+    "image": "dj.webp",
+    "screen": "dj-current.jpg",
+    "features": [
+      [
+        "Two decks. One workspace.",
+        "Waveforms, cues, loops and key controls keep the essentials together."
+      ],
+      [
+        "Your library, organised.",
+        "Find tracks, arrange crates and prepare your next session."
+      ],
+      [
+        "More ways to perform.",
+        "Explore stem controls, MIDI control and the video workspace."
+      ]
+    ],
+    "availability": "Harold DJ Pro is in active development. A public download and supported-system requirements have not yet been announced."
+  },
+  {
+    "id": "radio",
+    "name": "Radio Studio",
+    "short": "Radio Studio",
+    "category": "audio",
+    "label": "Radio & broadcasting",
+    "headline": "Bring your station together.",
+    "description": "Your music library, show schedule, playout and broadcast tools. Together in one studio.",
+    "version": "network.3",
+    "status": "Release in preparation",
+    "image": "radio.webp",
+    "screen": "radio-current.jpg",
+    "features": [
+      [
+        "Plan the next hour.",
+        "Work with schedules, templates and your station’s music library."
+      ],
+      [
+        "Keep playout in view.",
+        "See the air log, upcoming tracks and quick-play controls together."
+      ],
+      [
+        "A connected studio.",
+        "Explore audio, video and network workflows from the station workspace."
+      ]
+    ],
+    "availability": "Radio Studio Network Pilot is a development build. Public downloads and production support are not yet available."
+  },
+  {
+    "id": "beklo",
+    "name": "Beklo",
+    "short": "Beklo",
+    "category": "everyday",
+    "label": "Mobility",
+    "headline": "A clearer way to get there.",
+    "description": "A ride-hailing experience built around the journey, from choosing a pickup to following a trip.",
+    "version": "2.1.0",
+    "status": "Product preview",
+    "image": "beklo.webp",
+    "screen": "beklo-current.jpg",
+    "features": [
+      [
+        "Start with your journey.",
+        "Explore the pickup and destination flow in the rider interface."
+      ],
+      [
+        "Keep the trip in view.",
+        "The product brings trip progress and driver workflows together."
+      ],
+      [
+        "Designed for local needs.",
+        "Rider and driver experiences are being developed alongside the service."
+      ]
+    ],
+    "availability": "Beklo is preparing for its public launch. Download links, service areas and ride availability will be announced here. This website is a product showcase; it does not accept ride bookings."
+  }
+]

@@ -1,53 +1,40 @@
-# HaroldHQ.app
+# HaroldHQ
 
-Official site for HaroldHQ, the creative and technology home of DJ Harold. Built as a small, dependency-free, mobile-friendly static website.
+Product website for Harold DJ Pro, Radio Studio and Beklo. The main site contains no personal DJ biography, bookings, artist profile or unreleased side projects.
 
-## Production and preview
+## Hosting
 
-- **Public production hosting:** Render static site `haroldhq-web` at https://haroldhq-web.onrender.com/
-- **Primary custom domain (pending DNS setup):** https://haroldhq.app/
-- **Vercel design preview:** https://haroldhq-website.vercel.app/ (Vercel account is Hobby; do not use it for commercial hosting without a qualifying plan).
-- **Private working Git remote:** `origin` → `harolddj256-Beatkiller/haroldhq-website`
-- **Public deployment mirror:** `render` → `harolddj256-Beatkiller/haroldhq-web-public` (only the public website, no DJ/Radio app source code).
+- Production: https://haroldhq-web.onrender.com/
+- Intended custom domain: https://haroldhq.app/ (domain configuration is separate)
+- Render service: `srv-db6piirl550s739j6h50`
+- Render publishes `public/` automatically from `render/main`.
+- `origin`: private website source repository.
+- `render`: public website deployment mirror. Never add application source or credentials.
 
-Render automatically deploys when `render/main` gets a new commit. The published content is the `public/` folder. Files in the website root are the editing source.
+## Edit and build
 
-## Updating the website
-
-Edit root `index.html`, `styles.css`, `script.js`, etc. Then synchronize the deploy assets:
-
-```sh
-mkdir -p public
-cp index.html styles.css script.js favicon.svg robots.txt sitemap.xml public/
-git add index.html styles.css script.js favicon.svg robots.txt sitemap.xml public README.md
-git commit -m "Update HaroldHQ website"
-git push origin main
-git push render main
-```
-
-Preview locally:
+Edit `products.json`, `build-site.cjs`, `styles.css` and `script.js`. Product pages and the homepage are generated with:
 
 ```sh
-python3 -m http.server 3000
+node build-site.cjs
 ```
 
-## Domain activation (Namecheap BasicDNS → Render)
+The build copies only website assets into `public/`. Preview that directory with a local static HTTP server. No package installation is needed.
 
-1. In the [production Render static site dashboard](https://dashboard.render.com/static/srv-db6piirl550s739j6h50), open Settings → Custom Domains → Add Custom Domain and add **haroldhq.app**. Render automatically adds `www.haroldhq.app` as a redirect to the root.
-2. In Namecheap Domain List → haroldhq.app → Manage → Advanced DNS → Host Records, remove old URL Redirect Record for `@` and existing CNAME/parking record for `www`.
-3. Add `A` record: Host `@`, Value `216.24.57.1`, TTL Automatic or 1 min.
-4. Add `CNAME` record: Host `www`, Value `haroldhq-web.onrender.com`, TTL Automatic or 1 min.
-5. Preserve unrelated MX/TXT or other records. If the domain has any AAAA records for the root/www, follow Render's guide on removing them. Keep Namecheap BasicDNS nameservers in place.
-6. Return to Render → Settings → Custom Domains → Verify. Render manages SSL/HTTPS for free. Confirm both https://haroldhq.app/ and https://www.haroldhq.app/ redirect correctly.
+## Photography and screenshots
 
-Official instructions: https://render.com/docs/configure-namecheap-dns
+The published scenes use licensed real photographs with conventionally composited current software screenshots. No AI-generated people or rooms are included. Credits are in `/credits/`.
 
-Do not configure `dj`, `radio`, `police`, `ai` or `beklo` subdomains until the corresponding websites/backends are deployed and tested.
+- DJ Pro 4.3.41: current source interface, fresh browser capture with synthetic local demo tracks.
+- Radio Studio Network Pilot network.3: current interface captured in an isolated preview profile.
+- Beklo 2.1.0: unchanged current browser interface with its built-in demonstration map.
 
-## Product readiness
+The actual interface screenshots are also available on each product page. Versions were checked on 13 October 2026. Update screenshot assets and version labels together.
 
-This site is a brand/portfolio home, not a production storefront. Product availability, real downloads, pricing, payment flow, customer support, and legal pages must be confirmed before any sale. Apply Harold Builder Agent Rulebook v1 before any pitch, demo, packaging or formal product release.
+## Availability
 
-## Design
+This is a product showcase. Do not advertise a public download, price, supported platform, live service area, or purchase flow without a verified release destination. Product pages currently communicate release preparation and link back to product information.
 
-Dark charcoal palette, soft coral accent, CSS-generated graphics, accessible responsive navigation, reduced-motion support, no cookies, trackers, external fonts or third-party scripts.
+## Accessibility and privacy
+
+Responsive navigation, keyboard-operable menus, visible focus indicators, reduced-motion support, and semantic product pages. No advertising trackers, account forms, payments or ride bookings on the marketing site.
