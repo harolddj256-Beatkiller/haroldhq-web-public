@@ -19,3 +19,7 @@ jobs:
           set -euo pipefail
           gh api --method PATCH "repos/$GH_REPO/releases/416568798" -F draft=true --jq '{id: .id, draft: .draft, tag_name: .tag_name}'
           test "$(gh api "repos/$GH_REPO/releases/416568798" --jq '.draft')" = true
+          if gh api "repos/$GH_REPO/git/ref/tags/radio-studio-1.0.0-beta.1-test" >/dev/null 2>&1; then
+            gh api --method DELETE "repos/$GH_REPO/git/refs/tags/radio-studio-1.0.0-beta.1-test"
+          fi
+          echo "Public download tag removed; release retained as a private draft."
