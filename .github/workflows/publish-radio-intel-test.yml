@@ -1,0 +1,55 @@
+name: Publish Intel Mac tester download
+on:
+  push:
+    branches: [radio-updates]
+    paths: [.github/workflows/publish-radio-intel-test.yml]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: radio-studio-1.0.0-beta.1-test
+      ARTIFACT_URL: 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-f9f8-820b-bf5d-c5da49508b8e/raw?se=2026-10-18T16%3A42%3A59Z&sp=r&sv=2026-02-06&sr=b&scid=01a14fda-9544-7946-804b-f05de2ddb958&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-18T12%3A03%3A35Z&ske=2026-10-19T12%3A03%3A35Z&sks=b&skv=2026-02-06&sig=zZwLt2vdKfaUuT58SmmCfTGA/XzPi/zQikcDM%2Bt368o%3D'
+    steps:
+      - name: Fetch and verify the exact tested artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error --retry 2 --max-time 300 "$ARTIFACT_URL" -o artifact.zip
+          echo 'c94474f8c68ee0c91fb5b02332016704f65d47a5297a92ee86159fe33124dfbc  artifact.zip' | sha256sum --check
+          python3 - <<'PY'
+          import hashlib, pathlib, shutil, zipfile
+          with zipfile.ZipFile('artifact.zip') as z:
+              matches = [n for n in z.namelist() if pathlib.PurePosixPath(n).name.endswith('.dmg')]
+              if len(matches) != 1:
+                  raise SystemExit('Expected exactly one Intel Mac installer: ' + repr(z.namelist()))
+              out = pathlib.Path('Radio-Studio-1.0-Beta-Intel-Mac.dmg')
+              with z.open(matches[0]) as src, out.open('wb') as dst:
+                  shutil.copyfileobj(src, dst)
+          digest = hashlib.file_digest(out.open('rb'), 'sha256').hexdigest()
+          pathlib.Path(str(out)+'.sha256').write_text(digest+'  '+out.name+'\n')
+          print(out.name, out.stat().st_size, digest)
+          PY
+      - name: Publish owner-activated tester installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > release-notes.md <<'EOF'
+          Radio Studio 1.0 Beta — tester downloads
+
+          Download the installer for your computer. Open Radio Studio, copy your Computer ID, and send it to Harold. Harold supplies a signed licence file for that computer, normally for a 30-day trial. Select Open licence file to activate.
+
+          Stems are included. Activation cannot be self-issued. No licence or private signing key is included in these downloads.
+
+          These are beta testing builds. Physical audio-device and long broadcast testing remain incomplete; test before using on air. The Mac builds are not notarized and the Windows build is not publisher-signed.
+
+          Product source: 1d564234ada13e0b1ebd70cca784c4658bcea044.
+          EOF
+          if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" --target "$GITHUB_SHA" --title "Radio Studio 1.0 Beta — tester downloads" --prerelease --latest=false --notes-file release-notes.md
+          fi
+          gh release upload "$RELEASE_TAG" Radio-Studio-1.0-Beta-Intel-Mac.dmg Radio-Studio-1.0-Beta-Intel-Mac.dmg.sha256
