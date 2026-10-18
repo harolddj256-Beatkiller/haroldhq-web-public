@@ -1,0 +1,21 @@
+name: Withdraw public radio downloads
+on:
+  push:
+    branches: [radio-updates]
+    paths: [.github/workflows/withdraw-radio-downloads.yml]
+permissions:
+  contents: write
+jobs:
+  withdraw:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Make the tester release private
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api --method PATCH "repos/$GH_REPO/releases/416568798" -F draft=true --jq '{id: .id, draft: .draft, tag_name: .tag_name}'
+          test "$(gh api "repos/$GH_REPO/releases/416568798" --jq '.draft')" = true
