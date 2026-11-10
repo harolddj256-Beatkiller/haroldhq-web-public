@@ -5,7 +5,9 @@ const money=n=>'US$'+n.toLocaleString('en-US',{maximumFractionDigits:0});
 const say=(el,t,bad)=>{el.textContent=t;el.classList.toggle('bad',!!bad)};
 async function api(path,body){const r=await fetch(API+path,body?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}:{});const j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j?.error?.message||'HaroldHQ could not be reached. Try again.');return j}
 if($('#buy')){
- let plan=null;const machine=(q.get('machine')||'').toLowerCase();if(/^[a-f0-9]{32}$/.test(machine))$('#machine').value=machine;
+ let plan=null;const machine=(q.get('machine')||'').toLowerCase();
+ // Opened from Radio Studio: the computer ID is this computer's, filled in and locked so it cannot be mistyped.
+ if(/^[a-f0-9]{32}$/.test(machine)){const f=$('#machine');f.value=machine;f.readOnly=true;f.classList.add('locked');f.nextElementSibling.textContent='Filled in by Radio Studio for this computer. The licence works only on it.'}
  api('/plans').then(d=>{plan=d.plans[0];const m=plan.prices.monthly,y=plan.prices.yearly;
   // What a year costs paid monthly, and what paying yearly saves.
   const save=12*m.USD-y.USD,pct=Math.round(100*save/(12*m.USD));
