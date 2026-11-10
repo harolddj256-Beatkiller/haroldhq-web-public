@@ -3,3 +3,10 @@
 .product-image img[src*="dj"],.detail-photo[src*="dj"]{object-position:center top}.hero-frame>img[src*="dj"]{object-position:center top}.hero-frame>img[src*="beklo"]{object-position:center 48%}
 
 .screenshot-area img,.detail-photo{height:auto}.hero-frame>img[src*="radio"]{object-position:center top}
+.buy-page .lead{color:var(--muted);max-width:640px}.buy-plan{border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:22px 0;background:var(--panel)}.buy-plan h2{margin:0 0 8px}.buy-plan ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.7}
+.buy-form{display:grid;gap:16px;max-width:560px}.buy-form label{display:grid;gap:6px;font-weight:600}.buy-form input:not([type=radio]){font:inherit;padding:11px 12px;border-radius:9px;border:1px solid var(--line);background:#0d0d0d;color:var(--ink)}.buy-form small{color:var(--muted);font-weight:400}
+.buy-period{border:0;padding:0;margin:0;display:grid;gap:10px}.buy-period legend{font-weight:600;margin-bottom:8px}.buy-period label{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;cursor:pointer;font-weight:400}.buy-period label:has(input:checked){border-color:var(--orange)}
+.buy-period b{margin-left:auto}.buy-period em{flex-basis:100%;font-style:normal;color:#7fdc8f;font-size:14px}
+.buy-pay{display:flex;flex-wrap:wrap;gap:10px}.buy-pay .button{display:grid;gap:2px;text-align:left;padding:12px 16px;cursor:pointer}.buy-pay small{opacity:.8;font-size:12px}.buy-pay button:disabled{opacity:.5;cursor:default}
+.buy-message{min-height:1.4em}.buy-message.bad,#plan .bad,#paid.bad{color:#ff8a7a}.fine{color:var(--muted);font-size:13px;max-width:640px;margin-top:20px}
+.buy-pay .primary small{color:#2b1006;opacity:.9}
